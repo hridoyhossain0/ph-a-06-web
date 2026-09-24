@@ -3,7 +3,7 @@ import ExerciseCard from './ExerciseCard';
 import { ExerciseType } from '../types/ExerciseType';
 
 interface ExerciseTypeProps {
-    exercises: ExerciseType
+    exercises: ExerciseType[]
 }
 const Exercise = ({ exercises }: ExerciseTypeProps) => {
     return (
