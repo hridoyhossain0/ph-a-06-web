@@ -4,12 +4,12 @@ import Logo from '../../../public/logo.png';
 import Image from 'next/image';
 
 const links = <>
-    <li><Link href="">Workouts</Link ></li>
-    <li><Link href="">My Plan</Link ></li>
+    <li><Link href="/">Workouts</Link ></li>
+    <li><Link href="/myPlan">My Plan</Link ></li>
 </>
 const NavBar = () => {
     return (
-        <nav className=' bg-black shadow  py-4 shadow-[rgba(275,275,275,.2)]'>
+        <nav className=' bg-black shadow  py-1.5 lg:py-3 shadow-[rgba(275,275,275,.2)]'>
             <div className="navbar container mx-auto ">
                 <div className="navbar-start">
                     <div className="dropdown">
