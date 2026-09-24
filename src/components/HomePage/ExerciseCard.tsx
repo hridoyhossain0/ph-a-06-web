@@ -12,7 +12,7 @@ const ExerciseCard = ({exercise} : {exercise: ExerciseType}) => {
                 <div className="relative h-[225px] w-full">
                     <Image
                         src={exercise.image}
-                        alt={exercise.id}
+                        alt={exercise.name}
                       
                         fill
                         className="object-cover"
