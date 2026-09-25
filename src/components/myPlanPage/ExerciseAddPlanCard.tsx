@@ -4,6 +4,7 @@ import { ExerciseType } from "../types/ExerciseType";
 import { FiClock, FiX } from "react-icons/fi";
 import { TbFlameFilled } from "react-icons/tb";
 import { FaCheck, FaStar } from "react-icons/fa";
+import Link from "next/link";
 
 interface ExerciseCardProps {
   exercise: ExerciseType;
@@ -18,10 +19,10 @@ const ExerciseAddPlanCard = ({
 }: ExerciseCardProps) => {
   return (
     <div className="flex items-center justify-between gap-5 rounded-2xl border border-gray-800 bg-[#14171d] p-4 text-white">
-      
+
       {/* Left Side */}
       <div className="flex min-w-0 items-center gap-4">
-        
+
         {/* Image */}
         <div className="h-[88px] w-[160px] shrink-0 overflow-hidden rounded-xl">
           <Image
@@ -45,7 +46,7 @@ const ExerciseAddPlanCard = ({
 
           {/* Stats */}
           <div className="mt-3 flex items-center gap-4 text-sm text-gray-300">
-            
+
             {/* Duration */}
             <div className="flex items-center gap-1.5">
               <FiClock className="text-lime-400" />
@@ -69,24 +70,29 @@ const ExerciseAddPlanCard = ({
 
       {/* Right Side */}
       <div className="flex shrink-0 items-center gap-3">
-        
-        {/* View Details */}
-        <button
-          className="rounded-full border border-gray-700 px-5 py-2.5 text-sm
-                     transition hover:border-gray-500 hover:bg-gray-800"
-        >
-          View Details
-        </button>
 
-        {/* Mark as Done */}
-        <button
-          // onClick={() => handleDone(exercise)}
-          className="flex items-center gap-2 rounded-full bg-lime-400 px-5 py-2.5
+        {/* View Details */}
+          <Link href={`../${exercise.id}`}>
+            <button
+              className="rounded-full border border-gray-700 px-5 py-2.5 text-sm
+                      transition hover:border-gray-500 hover:bg-gray-800"
+            >
+              View Details
+            </button>
+          </Link>
+
+          {/* Mark as Done */}
+
+          <button
+            // onClick={() => handleDone(exercise)}
+            className="flex items-center gap-2 rounded-full bg-lime-400 px-5 py-2.5
                      text-sm font-medium text-black transition hover:bg-lime-300"
-        >
-          <FaCheck size={12} />
-          Mark as Done
-        </button>
+          >
+            <FaCheck size={12} />
+            Mark as Done
+          </button>
+        
+
 
         {/* Remove */}
         <button

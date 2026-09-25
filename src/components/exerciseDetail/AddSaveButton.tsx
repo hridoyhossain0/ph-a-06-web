@@ -20,7 +20,13 @@ const AddSaveButton = ({ exercise }: ExerciseProps) => {
   const { addSave, setAddSave } = context;
 
   const handleAddSave = () => {
-    setAddSave((prev) => [...prev, exercise]);
+    const isAlreadyAdded = addSave.some(plan => plan.id === exercise.id);
+
+    if (!isAlreadyAdded) {
+      setAddSave([...addSave, exercise]);
+    } else { 
+      setAddSave(addSave.filter(plan => plan.id !== exercise.id))
+    }
   };
 
   return (

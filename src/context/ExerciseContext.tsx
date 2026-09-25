@@ -14,19 +14,23 @@ interface ExerciseContextType {
   setAddPlan: Dispatch<SetStateAction<ExerciseType[]>>;
   addSave: ExerciseType[];
   setAddSave: Dispatch<SetStateAction<ExerciseType[]>>;
+  activeTab: string;                                    // Added activeTab tracking
+  setActiveTab: Dispatch<SetStateAction<string>>;       // Added updater function tracking
 }
 
 export const ExerciseContext = createContext<ExerciseContextType>({
   addPlan: [],
-  setAddPlan: () => { }, // empty placeholder function
+  setAddPlan: () => { }, 
   addSave: [],
-  setAddSave: () => { }, // empty placeholder function
+  setAddSave: () => { }, 
+  activeTab: 'today',                                   // Default value
+  setActiveTab: () => { }, 
 });
-
 
 const ExerciseProvider = ({ children }: { children: ReactNode }) => {
   const [addPlan, setAddPlan] = useState<ExerciseType[]>([]);
   const [addSave, setAddSave] = useState<ExerciseType[]>([]);
+  const [activeTab, setActiveTab] = useState<string>('today'); // Added activeTab state management
 
   return (
     <ExerciseContext.Provider
@@ -35,6 +39,8 @@ const ExerciseProvider = ({ children }: { children: ReactNode }) => {
         setAddPlan,
         addSave,
         setAddSave,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}
