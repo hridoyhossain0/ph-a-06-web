@@ -1,36 +1,46 @@
-"use client";
+'use client';
 
-import { ExerciseType } from "@/components/types/ExerciseType";
+import { ExerciseType } from '@/components/types/ExerciseType';
 import {
   createContext,
   ReactNode,
   useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+} from 'react';
+
+type ActiveTab = 'today' | 'saved';
 
 interface ExerciseContextType {
   addPlan: ExerciseType[];
-  setAddPlan: Dispatch<SetStateAction<ExerciseType[]>>;
+  setAddPlan: React.Dispatch<
+    React.SetStateAction<ExerciseType[]>
+  >;
+
   addSave: ExerciseType[];
-  setAddSave: Dispatch<SetStateAction<ExerciseType[]>>;
-  activeTab: string;                                    // Added activeTab tracking
-  setActiveTab: Dispatch<SetStateAction<string>>;       // Added updater function tracking
+  setAddSave: React.Dispatch<
+    React.SetStateAction<ExerciseType[]>
+  >;
+
+  activeTab: ActiveTab;
+  setActiveTab: React.Dispatch<
+    React.SetStateAction<ActiveTab>
+  >;
 }
 
-export const ExerciseContext = createContext<ExerciseContextType>({
-  addPlan: [],
-  setAddPlan: () => { }, 
-  addSave: [],
-  setAddSave: () => { }, 
-  activeTab: 'today',                                   // Default value
-  setActiveTab: () => { }, 
-});
+export const ExerciseContext =
+  createContext<ExerciseContextType | null>(null);
 
-const ExerciseProvider = ({ children }: { children: ReactNode }) => {
+interface ExerciseProviderProps {
+  children: ReactNode;
+}
+
+export const ExerciseProvider = ({
+  children,
+}: ExerciseProviderProps) => {
   const [addPlan, setAddPlan] = useState<ExerciseType[]>([]);
   const [addSave, setAddSave] = useState<ExerciseType[]>([]);
-  const [activeTab, setActiveTab] = useState<string>('today'); // Added activeTab state management
+
+  const [activeTab, setActiveTab] =
+    useState<ActiveTab>('today');
 
   return (
     <ExerciseContext.Provider
@@ -47,5 +57,3 @@ const ExerciseProvider = ({ children }: { children: ReactNode }) => {
     </ExerciseContext.Provider>
   );
 };
-
-export default ExerciseProvider;
