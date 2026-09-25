@@ -1,3 +1,5 @@
+import AddPlanButton from "@/components/exerciseDetail/AddPlanButton";
+import AddSaveButton from "@/components/exerciseDetail/AddSaveButton";
 import { ExerciseType } from "@/components/types/ExerciseType";
 import Image from "next/image";
 
@@ -165,13 +167,9 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
                         {/* Buttons */}
                         <div className="mt-7 flex gap-3">
 
-                            <button className="rounded-lg bg-lime-400 px-5 py-3 text-sm font-bold text-black hover:bg-lime-300">
-                                📅 Add to today's plan
-                            </button>
+                            <AddPlanButton exercise={exercise}/>
 
-                            <button className="rounded-lg border border-gray-700 px-5 py-3 text-sm text-gray-300 hover:text-white">
-                                ♡ Save for later
-                            </button>
+                            <AddSaveButton exercise={exercise}/>
 
                         </div>
 

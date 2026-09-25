@@ -1,7 +1,15 @@
+'use client'
+import ExerciseAddPlanCard from '@/components/myPlanPage/ExerciseAddPlanCard';
+import { ExerciseType } from '@/components/types/ExerciseType';
+import { ExerciseContext } from '@/context/ExerciseContext';
 import Link from 'next/link';
-import React from 'react';
+import { useContext } from 'react';
 
 const MyPlanPage = () => {
+
+    const { addPlan , addSave} = useContext(ExerciseContext);
+    
+
     return (
         <div className='container mx-auto'>
             <div className='space-y-2.5 my-3'>
@@ -26,26 +34,34 @@ const MyPlanPage = () => {
 
             <div>
                 {/* name of each tab group should be unique */}
-                <div className='flex w-[100%] justify-between'>
+                    <div className="tabs  tabs-box">
+                        <input type="radio" name="my_tabs_1" className="tab" aria-label="Today's Plan" />
+                        <div className="tab-content bg-base-100 border-base-300 p-6 ">
+                            {addPlan.length > 0 ? addPlan.map((exercise: ExerciseType) => {
+                                return <ExerciseAddPlanCard key={exercise.id} exercise={exercise} />
+                            }) : <div className='text-center text-3xl font-semibold '>No Read Book found</div>}
+                        </div>
+
+
+                        <input type="radio" name="my_tabs_1" className="tab" aria-label="Saved" defaultChecked />
+                         <div className="tab-content bg-base-100 border-base-300 p-6 ">
+                            {addSave.length > 0 ? addSave.map((exercise : ExerciseType) => {
+                                return <ExerciseAddPlanCard key={exercise.id} exercise={exercise} />
+                            }) : <div className='text-center text-3xl font-semibold '>No Read Book found</div>}
+                        </div>
+
+                    </div>
+                    {/* 
                     <div className="tabs  tabs-box">
                         <input type="radio" name="my_tabs_1" className="tab" aria-label="Tab 1" />
 
-
                         <input type="radio" name="my_tabs_1" className="tab" aria-label="Tab 1" defaultChecked />
 
-                    </div>
-
-                    <div className="tabs  tabs-box">
-                        <input type="radio" name="my_tabs_1" className="tab" aria-label="Tab 1" />
-
-                        <input type="radio" name="my_tabs_1" className="tab" aria-label="Tab 1" defaultChecked />
-
-                    </div>
+                    </div> */}
 
 
 
 
-                </div>
 
                 <div className='flex flex-col space-y-2.5 tabs-box p-5 rounded-2xl my-5 items-center'>
                     <h1>NOTHING HERE YET</h1>

@@ -9,7 +9,7 @@ const HeroSection = () => {
                 <div className="hero-content flex-col  lg:flex-row-reverse">
                     <div >
                         <Image
-                            className='w-35 h-50 lg:w-100 lg:h-112'
+                            className='w-45 h-50 lg:w-100 lg:h-112'
                             alt="Tailwind CSS hero component"
                             src={HeroImage}
                             height={600}
@@ -17,7 +17,7 @@ const HeroSection = () => {
                         />
                     </div>
                     <div>
-                        <p className='text-yellow-300'>WORKOUT LIBRARY</p>
+                        <p className='text-yellow-300 text-xl'>WORKOUT LIBRARY</p>
 
                         <h1 className="text-5xl font-bold">TRAIN WITH INTENT. LOG <br />
                             EVERY SET.</h1>

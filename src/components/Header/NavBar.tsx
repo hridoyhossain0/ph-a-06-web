@@ -1,13 +1,17 @@
+'use client'
 import Link from 'next/link';
 
 import Logo from '../../../public/logo.png';
 import Image from 'next/image';
+import { useContext } from 'react';
+import { ExerciseContext } from '@/context/ExerciseContext';
 
 const links = <>
     <li><Link href="/">Workouts</Link ></li>
     <li><Link href="/myPlan">My Plan</Link ></li>
 </>
 const NavBar = () => {
+    const {addSave , addPlan} = useContext(ExerciseContext)
     return (
         <nav className=' bg-black shadow  py-1.5 lg:py-3 shadow-[rgba(275,275,275,.2)]'>
             <div className="navbar container mx-auto ">
@@ -34,8 +38,8 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end text-xl gap-7">
-                    <button>Plan</button>
-                    <button>Saved</button>
+                    <button>Plan </button>
+                    <button>Saved </button>
 
                 </div>
             </div>
