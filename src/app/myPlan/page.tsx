@@ -6,11 +6,39 @@ import { ExerciseContext } from '@/context/ExerciseContext';
 import { useContext } from 'react';
 
 const MyPlanPage = () => {
-    // Read the active state parameters straight out of your Context Provider
-    const { addPlan, addSave, activeTab, setActiveTab } = useContext(ExerciseContext);
+    // 1. Destructure setAddPlan and setAddSave from your Context Provider
+    const context = useContext(ExerciseContext);
+
+    // Safety fallback guard
+    if (!context) return null;
+
+    const { addPlan, setAddPlan, addSave, setAddSave, activeTab, setActiveTab } = context;
 
     // Determine which list to use based on the global active tab state
     const currentList = activeTab === 'today' ? addPlan : addSave;
+
+    // 2. Define the remove tracking function logic
+    const handleRemove = (id: number | string) => {
+        if (activeTab === 'today') {
+            setAddPlan((prev) => prev.filter((item) => item.id !== id));
+        } else {
+            setAddSave((prev) => prev.filter((item) => item.id !== id));
+        }
+    };
+
+    // 3. Define the completion toggle function logic
+    const handleDone = (exercise: ExerciseType) => {
+        if (activeTab === 'today') {
+            // Remove from Today's Plan list layout
+            setAddPlan((prev) => prev.filter((item) => item.id !== exercise.id));
+            
+            // Add to Saved list history if it doesn't already exist there
+            setAddSave((prev) => {
+                if (prev.some((item) => item.id === exercise.id)) return prev;
+                return [...prev, exercise];
+            });
+        }
+    };
 
     return (
         <div className='container mt-35 mx-auto'>
@@ -62,7 +90,14 @@ const MyPlanPage = () => {
                         <div className='space-y-4'>
                             {currentList.length > 0 ? (
                                 currentList.map((exercise: ExerciseType) => (
-                                    <ExerciseAddPlanCard key={exercise.id} exercise={exercise} />
+                                    // 4. Pass down handleDone and handleRemove variables down into your custom Card
+                                    <ExerciseAddPlanCard 
+                                        key={exercise.id} 
+                                        exercise={exercise} 
+                                        handleDone={handleDone}
+                                        handleRemove={handleRemove}
+                                        activeTab={activeTab} // Optional: Helps hide the "Done" checkmark button on the Saved tab screen layout configuration
+                                    />
                                 ))
                             ) : (
                                 <ValueDefault />

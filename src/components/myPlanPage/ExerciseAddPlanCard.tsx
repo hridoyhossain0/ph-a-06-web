@@ -8,23 +8,31 @@ import Link from "next/link";
 
 interface ExerciseCardProps {
   exercise: ExerciseType;
-  // handleDone: (exercise: ExerciseType) => void;
-  // handleRemove: (exercise: ExerciseType) => void;
+  handleDone: (exercise: ExerciseType) => void;
+  handleRemove: (exercise: ExerciseType) => void; // ✅ Fixed interface to accept ID types directly
 }
 
 const ExerciseAddPlanCard = ({
   exercise,
-  // handleDone,
-  // handleRemove,
+  handleDone,
+  handleRemove,
 }: ExerciseCardProps) => {
   return (
-    <div className="flex items-center justify-between gap-5 rounded-2xl border border-gray-800 bg-[#14171d] p-4 text-white">
+    <div className="relative flex flex-col gap-4 rounded-2xl border border-gray-800 bg-[#14171d] p-4 text-white sm:flex-row sm:items-center sm:justify-between sm:gap-5">
 
-      {/* Left Side */}
-      <div className="flex min-w-0 items-center gap-4">
+      {/* Remove Button for Mobile (Top Right Position) */}
+      <button
+        onClick={() => handleRemove?.(exercise)}
+        className="absolute right-4 top-4 text-xl text-gray-500 transition hover:text-white sm:hidden"
+      >
+        <FiX />
+      </button>
 
-        {/* Image */}
-        <div className="h-[88px] w-[160px] shrink-0 overflow-hidden rounded-xl">
+      {/* Left Side: Media + Text Information */}
+      <div className="flex flex-col gap-4 min-w-0 xs:flex-row xs:items-center sm:flex-row sm:gap-4">
+
+        {/* Responsive Image Container */}
+        <div className="h-[120px] w-full shrink-0 overflow-hidden rounded-xl xs:h-[100px] xs:w-[150px] sm:h-[88px] sm:w-[160px]">
           <Image
             src={exercise.image}
             height={200}
@@ -35,18 +43,17 @@ const ExerciseAddPlanCard = ({
         </div>
 
         {/* Exercise Information */}
-        <div className="min-w-0">
-          <h3 className="text-lg font-bold uppercase">
+        <div className="min-w-0 pr-6 xs:pr-0">
+          <h3 className="text-base font-bold uppercase tracking-wide sm:text-lg">
             {exercise.name}
           </h3>
 
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-0.5 text-xs text-gray-500 sm:text-sm">
             {exercise.equipment}
           </p>
 
-          {/* Stats */}
-          <div className="mt-3 flex items-center gap-4 text-sm text-gray-300">
-
+          {/* Stats Bar */}
+          <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-gray-300 sm:mt-3 sm:text-sm">
             {/* Duration */}
             <div className="flex items-center gap-1.5">
               <FiClock className="text-lime-400" />
@@ -68,41 +75,41 @@ const ExerciseAddPlanCard = ({
         </div>
       </div>
 
-      {/* Right Side */}
-      <div className="flex shrink-0 items-center gap-3">
+      {/* Right Side: Action Control Buttons */}
+      <div className="flex flex-col-reverse gap-2 shrink-0 pt-2 border-t border-gray-800/60 xs:flex-row xs:items-center sm:flex-row sm:gap-3 sm:pt-0 sm:border-0">
 
         {/* View Details */}
-          <Link href={`../${exercise.id}`}>
-            <button
-              className="rounded-full border border-gray-700 px-5 py-2.5 text-sm
-                      transition hover:border-gray-500 hover:bg-gray-800"
-            >
-              View Details
-            </button>
-          </Link>
-
-          {/* Mark as Done */}
-
+        <Link href={`../${exercise.id}`} className="w-full xs:w-auto">
           <button
-            // onClick={() => handleDone(exercise)}
-            className="flex items-center gap-2 rounded-full bg-lime-400 px-5 py-2.5
-                     text-sm font-medium text-black transition hover:bg-lime-300"
+            className="w-full rounded-full border border-gray-700 px-5 py-2.5 text-sm
+              transition hover:border-gray-500 hover:bg-gray-800 sm:w-auto whitespace-nowrap"
           >
-            <FaCheck size={12} />
-            Mark as Done
+            View Details
           </button>
-        
+        </Link>
 
-
-        {/* Remove */}
+        {/* Mark as Done - FIXED DESIGN PATHS */}
         <button
-          // onClick={() => handleRemove(exercise)}
-          className="ml-2 text-xl text-gray-500 transition hover:text-white"
+          onClick={() => handleDone?.(exercise)}
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-lime-400 px-5 py-2.5
+             text-sm font-medium text-black transition hover:bg-lime-300 sm:w-auto 
+             whitespace-nowrap h-fit min-w-max"
+        >
+          <FaCheck size={12} className="shrink-0" />
+          <span>Mark as Done</span>
+        </button>
+
+        {/* Remove Button for Tablet & Desktop Layout */}
+        <button
+          onClick={() => handleRemove?.(exercise)}
+          className="hidden ml-2 text-xl text-gray-500 transition hover:text-white sm:block shrink-0"
         >
           <FiX />
         </button>
       </div>
+
     </div>
+  
   );
 };
 
