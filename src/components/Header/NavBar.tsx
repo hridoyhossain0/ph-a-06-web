@@ -11,9 +11,9 @@ const links = <>
     <li><Link href="/myPlan">My Plan</Link ></li>
 </>
 const NavBar = () => {
-    const {addSave , addPlan} = useContext(ExerciseContext)
+   const { addPlan , addSave} = useContext(ExerciseContext);
     return (
-        <nav className=' bg-black shadow  py-1.5 lg:py-3 shadow-[rgba(275,275,275,.2)]'>
+        <nav className=' bg-black shadow  fixed top-0 left-0 right-0 z-50 w-full  py-1.5 lg:py-3 shadow-[rgba(275,275,275,.2)]'>
             <div className="navbar container mx-auto ">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -38,8 +38,8 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end text-xl gap-7">
-                    <button>Plan </button>
-                    <button>Saved </button>
+                    <button>Plan <span className='rounded-full px-3 text-black ml-2.5 font-bold py-1 bg-amber-300'>{addPlan.length}</span></button>
+                    <button>Saved <span className='rounded-full px-3 text-black ml-2.5 font-bold py-1 bg-amber-300'>{addSave.length}</span></button>
 
                 </div>
             </div>

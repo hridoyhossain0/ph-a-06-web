@@ -16,7 +16,13 @@ interface ExerciseContextType {
   setAddSave: Dispatch<SetStateAction<ExerciseType[]>>;
 }
 
-export const ExerciseContext = createContext<ExerciseContextType | null>(null);
+export const ExerciseContext = createContext<ExerciseContextType>({
+  addPlan: [],
+  setAddPlan: () => { }, // empty placeholder function
+  addSave: [],
+  setAddSave: () => { }, // empty placeholder function
+});
+
 
 const ExerciseProvider = ({ children }: { children: ReactNode }) => {
   const [addPlan, setAddPlan] = useState<ExerciseType[]>([]);

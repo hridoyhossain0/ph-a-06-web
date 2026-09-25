@@ -7,14 +7,14 @@ import { FaCheck, FaStar } from "react-icons/fa";
 
 interface ExerciseCardProps {
   exercise: ExerciseType;
-  handleDone: (exercise: ExerciseType) => void;
-  handleRemove: (exercise: ExerciseType) => void;
+  // handleDone: (exercise: ExerciseType) => void;
+  // handleRemove: (exercise: ExerciseType) => void;
 }
 
 const ExerciseAddPlanCard = ({
   exercise,
-  handleDone,
-  handleRemove,
+  // handleDone,
+  // handleRemove,
 }: ExerciseCardProps) => {
   return (
     <div className="flex items-center justify-between gap-5 rounded-2xl border border-gray-800 bg-[#14171d] p-4 text-white">
@@ -80,7 +80,7 @@ const ExerciseAddPlanCard = ({
 
         {/* Mark as Done */}
         <button
-          onClick={() => handleDone(exercise)}
+          // onClick={() => handleDone(exercise)}
           className="flex items-center gap-2 rounded-full bg-lime-400 px-5 py-2.5
                      text-sm font-medium text-black transition hover:bg-lime-300"
         >
@@ -90,7 +90,7 @@ const ExerciseAddPlanCard = ({
 
         {/* Remove */}
         <button
-          onClick={() => handleRemove(exercise)}
+          // onClick={() => handleRemove(exercise)}
           className="ml-2 text-xl text-gray-500 transition hover:text-white"
         >
           <FiX />

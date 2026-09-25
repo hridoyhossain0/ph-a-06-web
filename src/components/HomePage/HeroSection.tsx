@@ -4,7 +4,7 @@ import HeroImage from '../../../public/banner.png';
 
 const HeroSection = () => {
     return (
-        <div className='container my-15 mx-auto'>
+        <div className='container my-15 mt-32 mx-auto'>
             <div className="hero bg-base-100 rounded-2xl  py-10">
                 <div className="hero-content flex-col  lg:flex-row-reverse">
                     <div >

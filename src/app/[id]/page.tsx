@@ -51,7 +51,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
     }
 
     return (
-        <section className="min-h-screen bg-[#0d0f13] px-4 py-10 text-white">
+        <section className="min-h-screen bg-[#0d0f13] px-4 mt-25 py-10 text-white">
             <div className="mx-auto max-w-7xl">
 
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
