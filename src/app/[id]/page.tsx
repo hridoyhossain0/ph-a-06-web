@@ -2,6 +2,7 @@ import AddPlanButton from "@/components/exerciseDetail/AddPlanButton";
 import AddSaveButton from "@/components/exerciseDetail/AddSaveButton";
 import { ExerciseType } from "@/components/types/ExerciseType";
 import Image from "next/image";
+import { notFound } from "next/navigation"; // <-- 1. Import native Next.js notFound trigger
 
 interface ParamsProps {
     params: Promise<{ id: string }>;
@@ -37,17 +38,10 @@ const getExercise = async (id: string) => {
 const ExerciseDetails = async ({ params }: ParamsProps) => {
     const { id } = await params;
 
-    const exercise = await getExercise(id);
+    const exercise  = await getExercise(id);
 
-    // If exercise doesn't exist
     if (!exercise) {
-        return (
-            <section className="flex min-h-screen items-center justify-center bg-[#0d0f13] text-white">
-                <h1 className="text-3xl font-bold">
-                    Exercise not found
-                </h1>
-            </section>
-        );
+        notFound(); 
     }
 
     return (
@@ -164,7 +158,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 
                         </div>
 
-                        {/* Buttons */}
+                        {/* Buttons (These individual components handle their own context internally) */}
                         <div className="mt-7 flex gap-3">
 
                             <AddPlanButton exercise={exercise}/>
@@ -181,7 +175,6 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 };
 
 export default ExerciseDetails;
-
 
 /* -------------------------------- */
 /* Info Row */
