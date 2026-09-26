@@ -4,7 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/Header/NavBar";
 import Footer from "@/components/Footer/Footer";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // <-- 1. CRITICAL: Added missing css styles file
+import "react-toastify/dist/ReactToastify.css"; 
 import { ExerciseProvider } from "@/context/ExerciseContext";
 import React from "react";
 
@@ -24,13 +24,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Updated project metadata to match your actual brand layout profile
 export const metadata: Metadata = {
   title: "FitLog — Workout Library",
   description: "Train hard, log honest. A dark, no-nonsense gym companion.",
 };
 
-// 2. FIXED: Standardized clean Next.js Root Layout type declarations
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,11 +39,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${oswald.variable} ${geistMono.variable} scroll-smooth bg-black h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col text-white"> {/* Added text-white for baseline layout contrast */}
+      <body className="min-h-full flex flex-col text-white">
         <ExerciseProvider>
           <NavBar />
           
-          {/* Main wrapper pushes footer down to the very bottom on short pages */}
+         
           <main className="flex-grow">
             {children}
           </main>

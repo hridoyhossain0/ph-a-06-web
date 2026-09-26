@@ -67,7 +67,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 w-full bg-black py-1.5 shadow shadow-[rgba(275,275,275,.2)] lg:py-3">
+    <nav className="fixed left-0 right-0 top-0 z-50 w-full bg-black py-1.5 shadow shadow-[rgba(275,275,275,.2)] lg:py-2">
 
       <div className="navbar container mx-auto">
 
