@@ -11,6 +11,7 @@ interface ExerciseCardProps {
   exercise: ExerciseType;
   handleDone: (exercise: ExerciseType) => void;
   handleRemove: (exercise: ExerciseType) => void;
+  handleViewDetails: (exercise: ExerciseType) => void; 
   activeTab: 'today' | 'saved';
 }
 
@@ -18,6 +19,7 @@ const ExerciseAddPlanCard = ({
   exercise,
   handleDone,
   handleRemove,
+  handleViewDetails, 
   activeTab,
 }: ExerciseCardProps) => {
   return (
@@ -88,6 +90,7 @@ const ExerciseAddPlanCard = ({
         {/* View Details */}
         <Link
           href={`/${exercise.id}`}
+          onClick={() => handleViewDetails(exercise)}
           className="w-full xs:w-auto"
         >
           <button

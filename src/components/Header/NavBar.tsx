@@ -26,7 +26,7 @@ const NavBar = () => {
     'px-4 py-2 text-white transition-colors';
 
   const activeStyle =
-    'bg-[rgba(0,160,0,0.5)] rounded-full font-medium text-yellow-400';
+    'bg-[rgba(0,160,0,0.2)] rounded-full font-medium text-yellow-400';
 
   // Navigation links
   const renderLinks = () => (
@@ -43,11 +43,11 @@ const NavBar = () => {
       {/* My Plan */}
       <li
         className={`${linkStyle} ${
-          pathname === '/myPlan' ? activeStyle : ''
+          pathname === '/my-plan' ? activeStyle : ''
         }`}
       >
         <Link
-          href="/myPlan"
+          href="/my-plan"
           onClick={() => setActiveTab('today')}
         >
           My Plan
@@ -87,7 +87,7 @@ const NavBar = () => {
             >
               <svg
                 aria-label="Menu"
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="http://w3.org"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -152,16 +152,16 @@ const NavBar = () => {
         {/* RIGHT SIDE */}
         {/* ========================= */}
 
-        <div className="navbar-end gap-3 text-xl text-white sm:gap-5 lg:gap-7">
+        <div className="navbar-end items-center gap-5 text-lg text-gray-300 sm:gap-6 lg:gap-8 font-medium">
 
           {/* ========================= */}
           {/* PLAN BUTTON */}
           {/* ========================= */}
 
           <Link
-            href="/myPlan"
+            href="/my-plan"
             onClick={handlePlanClick}
-            className="transition hover:text-lime-400"
+            className="transition hover:text-white"
           >
             <button
               type="button"
@@ -169,7 +169,7 @@ const NavBar = () => {
             >
               <span>Plan</span>
 
-              <span className="ml-2.5 rounded-full bg-amber-300 px-3 py-1 text-sm font-bold text-black">
+              <span className="ml-2 w-8 h-8 flex items-center justify-center rounded-full bg-[#ccff00] text-xl font-bold text-black">
                 {addPlan.length}
               </span>
             </button>
@@ -180,9 +180,9 @@ const NavBar = () => {
           {/* ========================= */}
 
           <Link
-            href="/myPlan"
+            href="/my-plan"
             onClick={handleSavedClick}
-            className="transition hover:text-lime-400"
+            className="transition hover:text-white"
           >
             <button
               type="button"
@@ -190,7 +190,7 @@ const NavBar = () => {
             >
               <span>Saved</span>
 
-              <span className="ml-2.5 rounded-full bg-amber-300 px-3 py-1 text-sm font-bold text-black">
+              <span className="ml-2 w-8 h-8 flex items-center justify-center rounded-full bg-transparent border-[#42424d] border-2 text-xl font-bold text-gray-400">
                 {addSave.length}
               </span>
             </button>
