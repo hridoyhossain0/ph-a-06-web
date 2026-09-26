@@ -2,7 +2,7 @@ import AddPlanButton from "@/components/exerciseDetail/AddPlanButton";
 import AddSaveButton from "@/components/exerciseDetail/AddSaveButton";
 import { ExerciseType } from "@/components/types/ExerciseType";
 import Image from "next/image";
-import { notFound } from "next/navigation"; // <-- 1. Import native Next.js notFound trigger
+import NotFound from "../not-found";
 
 interface ParamsProps {
     params: Promise<{ id: string }>;
@@ -10,23 +10,32 @@ interface ParamsProps {
 
 // Get all exercises
 const getExercises = async (): Promise<ExerciseType[]> => {
-    const res = await fetch(
-        "https://api.abcz.workers.dev/api/fitlog",
-        {
-            cache: "no-store",
+    try {
+        const res = await fetch(
+            "https://api.api-store.workers.dev/api/fitlog",
+            {
+                cache: "no-store",
+            }
+        );
+
+        if (!res.ok) {
+            return []; 
         }
-    );
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch exercises");
+        return await res.json();
+    } catch (error) {
+        console.error("Fetch exercises failed:", error);
+        return []; 
     }
-
-    return res.json();
 };
 
 // Get single exercise
 const getExercise = async (id: string) => {
     const exercises = await getExercises();
+
+    if (!Array.isArray(exercises) || exercises.length === 0) {
+        return undefined;
+    }
 
     const exercise = exercises.find(
         (item) => item.id.toString() === id
@@ -41,7 +50,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
     const exercise  = await getExercise(id);
 
     if (!exercise) {
-        notFound(); 
+        return <NotFound/>; 
     }
 
     return (
@@ -77,7 +86,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 
                         {/* Muscle Groups */}
                         <div className="mt-4 flex flex-wrap gap-2">
-                            {exercise.muscleGroups.map((muscle) => (
+                            {exercise.muscleGroups?.map((muscle) => (
                                 <span
                                     key={muscle}
                                     className="rounded-full bg-lime-400 px-3 py-1 text-xs font-bold text-black"
@@ -102,7 +111,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 
                             <InfoRow
                                 label="SETS"
-                                value={exercise.sets.toString()}
+                                value={exercise.sets?.toString()}
                             />
 
                             <InfoRow
@@ -122,7 +131,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 
                             <InfoRow
                                 label="RATING"
-                                value={exercise.rating.toString()}
+                                value={exercise.rating?.toString()}
                                 last
                             />
 
@@ -137,7 +146,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 
                             <ol className="mt-4 space-y-3">
 
-                                {exercise.instructions.map(
+                                {exercise.instructions?.map(
                                     (instruction, index) => (
                                         <li
                                             key={index}
@@ -158,7 +167,7 @@ const ExerciseDetails = async ({ params }: ParamsProps) => {
 
                         </div>
 
-                        {/* Buttons (These individual components handle their own context internally) */}
+                        {/* Buttons */}
                         <div className="mt-7 flex gap-3">
 
                             <AddPlanButton exercise={exercise}/>

@@ -1,11 +1,11 @@
 'use client'
 
-import Link from 'next/link'; // <-- ADD THIS MISSING IMPORT LINE
+import Link from 'next/link'; 
 import { FiArrowLeft, FiHome } from 'react-icons/fi';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-black px-4 py-10 text-white">
+    <main className="min-h-screen bg-black px-4 mt-25 py-10 text-white">
 
       <div className="mx-auto flex min-h-[85vh] max-w-5xl items-center justify-center">
 

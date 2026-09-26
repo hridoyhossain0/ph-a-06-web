@@ -3,6 +3,8 @@ import Image from 'next/image';
 import React from 'react';
 import { ExerciseType } from '../types/ExerciseType';
 import Link from 'next/link';
+import { Flame, Star } from 'lucide-react';
+import { FiClock } from 'react-icons/fi';
 
 const ExerciseCard = ({ exercise }: { exercise: ExerciseType }) => {
     return (
@@ -54,17 +56,17 @@ const ExerciseCard = ({ exercise }: { exercise: ExerciseType }) => {
                         <div className="flex items-center gap-5 text-sm text-gray-400">
 
                             <div className="flex items-center gap-2">
-                                {/* <FiClock /> */}
+                                <FiClock />
                                 <span>{exercise.duration} min</span>
                             </div>
 
                             <div className="flex items-center gap-2">
-                                {/* <Flame size={18} /> */}
+                                <Flame size={18} />
                                 <span>{exercise.caloriesBurned} kcal</span>
                             </div>
 
                             <div className="flex items-center gap-2">
-                                {/* <Star size={18} /> */}
+                                <Star size={18} />
                                 <span>{exercise.rating}</span>
                             </div>
 
