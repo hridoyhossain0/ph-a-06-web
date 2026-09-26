@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HomePage/HeroSection";
 import Exercise from "@/components/HomePage/Exercise";
-import NotFound from "./not-found";
+import NoExercises from "@/components/HomePage/NoExercises";
 
 const getLibrary = async () => {
   try {
@@ -20,14 +20,17 @@ const getLibrary = async () => {
 export default async function Home() {
   const exercises = await getLibrary();
 
-  if (!exercises) {
-    return <NotFound />; 
-  }
-
   return (
     <>
       <HeroSection />
-      <Exercise exercises={Array.isArray(exercises) ? exercises : []} />
+      
+      {Array.isArray(exercises) && exercises.length > 0 ? (
+        <Exercise exercises={exercises} />
+      ) : (
+        <div className="container mx-auto px-4 pb-16">
+          <NoExercises />
+        </div>
+      )}
     </>
   );
 }
